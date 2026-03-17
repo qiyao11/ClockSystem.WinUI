@@ -105,3 +105,4 @@ C:\Users\Lenovo\Documents\trae_projects\winui\ClockSystem.WinUI\obj\Debug\net10.
 C:\Users\Lenovo\Documents\trae_projects\winui\ClockSystem.WinUI\obj\Debug\net10.0-windows10.0.19041.0\qualifiers.txt
 C:\Users\Lenovo\Documents\trae_projects\winui\ClockSystem.WinUI\obj\Debug\net10.0-windows10.0.19041.0\qualifiers.txt.intermediate
 C:\Users\Lenovo\Documents\trae_projects\winui\ClockSystem.WinUI\obj\Debug\net10.0-windows10.0.19041.0\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Lenovo\Documents\trae_projects\winui\ClockSystem.WinUI\obj\Debug\net10.0-windows10.0.19041.0\ClockSystem.WinUI.sourcelink.json

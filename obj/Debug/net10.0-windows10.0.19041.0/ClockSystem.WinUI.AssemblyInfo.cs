@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClockSystem.WinUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+baccff68d6af9e98381a728f58ca484825b5030e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClockSystem.WinUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClockSystem.WinUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

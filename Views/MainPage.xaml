@@ -7,62 +7,168 @@
     xmlns:local="using:ClockSystem.WinUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-    <Page.Resources>
-        <ResourceDictionary>
-            <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
-            <SolidColorBrush x:Key="SecondaryColor" Color="#3498DB"/>
-            <SolidColorBrush x:Key="AccentColor" Color="#E74C3C"/>
-            <SolidColorBrush x:Key="TextColor" Color="#333333"/>
-            <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
-        </ResourceDictionary>
-    </Page.Resources>
+    Background="{StaticResource BackgroundBrush}">
 
-    <Grid Background="#F5F5F5">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Border Grid.Row="0" Margin="20,20,20,10" Padding="20" Background="White" CornerRadius="8">
+
+        <!-- Header Section -->
+        <Border Grid.Row="0" 
+                Background="{StaticResource SurfaceBrush}" 
+                BorderBrush="{StaticResource BorderLightBrush}" 
+                BorderThickness="0,0,0,1"
+                Padding="24,16">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                
-                <TextBlock Grid.Column="0" Text="母钟时间:" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
-                <TextBlock Grid.Column="1" Text="{Binding TimeDisplay, Mode=OneWay}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="{StaticResource SecondaryColor}"/>
-                
-                <Button Grid.Column="3" Content="同步系统时间" Click="OnSyncTimeClicked" Margin="5,0"/>
-                <Button Grid.Column="4" Content="调整时间" Click="OnAdjustTimeClicked" Margin="5,0"/>
-                <Button Grid.Column="5" Content="系统设置" Click="OnSettingsClicked" Margin="5,0"/>
+
+                <!-- Logo and Title -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12">
+                    <Grid Width="40" Height="40" Background="{StaticResource PrimaryBrush}" CornerRadius="10">
+                        <FontIcon Glyph="&#xE823;" Foreground="White" FontSize="20"/>
+                    </Grid>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="母钟系统" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                        <TextBlock Text="Master Clock System" FontSize="12" Foreground="{StaticResource TextMutedBrush}" FontWeight="Medium"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Current Time Display -->
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                        <FontIcon Glyph="&#xE823;" Foreground="{StaticResource PrimaryBrush}" FontSize="16"/>
+                        <TextBlock Text="母钟时间" FontSize="14" Foreground="{StaticResource TextSecondaryBrush}" FontWeight="Medium"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding TimeDisplay, Mode=OneWay}" 
+                               FontSize="28" 
+                               FontWeight="Bold" 
+                               Foreground="{StaticResource PrimaryBrush}"
+                               FontFamily="Consolas"/>
+                </StackPanel>
+
+                <!-- Action Buttons -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                    <Button Style="{StaticResource SecondaryButtonStyle}" Click="OnSyncTimeClicked">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Glyph="&#xE895;" FontSize="14"/>
+                            <TextBlock Text="同步系统时间" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource PrimaryButtonStyle}" Click="OnAdjustTimeClicked">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Glyph="&#xE70F;" FontSize="14"/>
+                            <TextBlock Text="调整时间" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource GhostButtonStyle}" Click="OnSettingsClicked">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Glyph="&#xE713;" FontSize="14"/>
+                            <TextBlock Text="设置" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" Margin="20,10,20,10" Padding="20" Background="White" CornerRadius="8">
-            <Canvas x:Name="ClockCanvas" Background="#F5F5F5" Margin="20"/>
-        </Border>
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Padding="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="2" Margin="20,10,20,20" Padding="20" Background="White" CornerRadius="8">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0" Text="报时系统反馈" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Foreground="{StaticResource TextColor}"/>
-                
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBlock x:Name="LogTextBlock" FontSize="12" FontFamily="Consolas" TextWrapping="Wrap"/>
-                </ScrollViewer>
-            </Grid>
-        </Border>
+            <!-- Clock Card -->
+            <Border Grid.Column="0" 
+                    Style="{StaticResource CardStyle}" 
+                    Margin="0,0,12,0"
+                    VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Card Header -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
+                        <FontIcon Glyph="&#xE823;" Foreground="{StaticResource PrimaryBrush}" FontSize="18" Margin="0,0,8,0"/>
+                        <TextBlock Text="模拟时钟" Style="{StaticResource CardTitleStyle}"/>
+                    </StackPanel>
+
+                    <!-- Clock Canvas -->
+                    <Border Grid.Row="1" 
+                            Background="{StaticResource Gray50Brush}" 
+                            CornerRadius="{StaticResource RadiusMd}"
+                            Padding="20">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas x:Name="ClockCanvas" Width="400" Height="400"/>
+                        </Viewbox>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Log Panel -->
+            <Border Grid.Column="1" 
+                    Style="{StaticResource CardStyle}" 
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Card Header -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                        <FontIcon Glyph="&#xE8FD;" Foreground="{StaticResource SecondaryBrush}" FontSize="18" Margin="0,0,8,0"/>
+                        <TextBlock Text="系统日志" Style="{StaticResource CardTitleStyle}"/>
+                    </StackPanel>
+
+                    <!-- Log Stats -->
+                    <Grid Grid.Row="1" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="{StaticResource Gray50Brush}" CornerRadius="{StaticResource RadiusSm}" Padding="12,8" Margin="0,0,6,0">
+                            <StackPanel>
+                                <TextBlock Text="状态" Style="{StaticResource LabelStyle}" FontSize="11"/>
+                                <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                                    <Ellipse Width="8" Height="8" Fill="{StaticResource SuccessBrush}"/>
+                                    <TextBlock Text="运行中" Style="{StaticResource ValueStyle}" FontSize="13"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Background="{StaticResource Gray50Brush}" CornerRadius="{StaticResource RadiusSm}" Padding="12,8" Margin="6,0,0,0">
+                            <StackPanel>
+                                <TextBlock Text="日志条目" Style="{StaticResource LabelStyle}" FontSize="11"/>
+                                <TextBlock Text="实时更新" Style="{StaticResource ValueStyle}" FontSize="13"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Log Content -->
+                    <Border Grid.Row="2" 
+                            Background="{StaticResource Gray800Brush}" 
+                            CornerRadius="{StaticResource RadiusMd}"
+                            Padding="12">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="LogTextBlock" 
+                                       FontSize="12" 
+                                       FontFamily="Consolas, Monaco, monospace"
+                                       Foreground="#10B981"
+                                       TextWrapping="Wrap"
+                                       LineHeight="20"/>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
