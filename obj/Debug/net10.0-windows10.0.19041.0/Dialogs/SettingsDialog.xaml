@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentDialog
+    x:Class="ClockSystem.WinUI.Dialogs.SettingsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="报时系统设置"
+    PrimaryButtonText="保存"
+    SecondaryButtonText="取消"
+    DefaultButton="Primary">
+    
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="TextColor" Color="#333333"/>
+            <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="500">
+        <StackPanel Padding="10" Spacing="10">
+            <TabView>
+                <TabViewItem Header="文件路径">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10">
+                        <StackPanel Spacing="10">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="音乐文件:" VerticalAlignment="Center" Width="70" Foreground="{StaticResource TextColor}"/>
+                                <TextBox Text="{Binding Config.Path.MusicPath, Mode=TwoWay}" Width="250"/>
+                                <Button x:ConnectionId='11' Content="浏览"                                />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="钟声文件:" VerticalAlignment="Center" Width="70" Foreground="{StaticResource TextColor}"/>
+                                <TextBox Text="{Binding Config.Path.BellPath, Mode=TwoWay}" Width="250"/>
+                                <Button x:ConnectionId='10' Content="浏览"                               />
+                            </StackPanel>
+
+                            <TextBlock Text="整点报时语音路径" FontWeight="Bold" Margin="0,10,0,5" Foreground="{StaticResource TextColor}"/>
+                            <ItemsControl x:ConnectionId='8' x:Name="HourPathsItemsControl"/>
+                            
+                            <TextBlock Text="半点报时语音路径" FontWeight="Bold" Margin="0,10,0,5" Foreground="{StaticResource TextColor}"/>
+                            <ItemsControl x:ConnectionId='9' x:Name="HalfPathsItemsControl"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabViewItem>
+
+                <TabViewItem Header="报时开关">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="整点报时开关" FontWeight="Bold" Margin="0,0,0,5" Foreground="{StaticResource TextColor}"/>
+                            <ItemsControl x:ConnectionId='2' x:Name="HourSwitchesItemsControl"/>
+                            
+                            <TextBlock Text="半点报时开关" FontWeight="Bold" Margin="0,10,0,5" Foreground="{StaticResource TextColor}"/>
+                            <ItemsControl x:ConnectionId='3' x:Name="HalfSwitchesItemsControl"/>
+
+                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
+                                <Button x:ConnectionId='4' Content="整点全选"                                  />
+                                <Button x:ConnectionId='5' Content="整点全不选"                                    />
+                                <Button x:ConnectionId='6' Content="半点全选"                                  />
+                                <Button x:ConnectionId='7' Content="半点全不选"                                    />
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabViewItem>
+
+                <TabViewItem Header="灯光设置">
+                    <StackPanel Padding="10" Spacing="15">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="灯光开启时间:" VerticalAlignment="Center" Width="100" Foreground="{StaticResource TextColor}"/>
+                            <TextBox Text="{Binding Config.Light.LightOnTime, Mode=TwoWay}" Width="100"/>
+                            <TextBlock Text="格式：HH:MM" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="灯光关闭时间:" VerticalAlignment="Center" Width="100" Foreground="{StaticResource TextColor}"/>
+                            <TextBox Text="{Binding Config.Light.LightOffTime, Mode=TwoWay}" Width="100"/>
+                            <TextBlock Text="格式：HH:MM" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabViewItem>
+            </TabView>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>
+

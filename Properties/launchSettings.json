@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ClockSystem.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ClockSystem.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
